@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Job Connect</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Login</h1>
+
+        {% if form.errors %}
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4">
+            Invalid email or password.
+        </div>
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold mb-1">Email</label>
+
+                <!-- FIXED FIELD HERE -->
+                <input type="email" name="email" required
+                       class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 font-semibold mb-1">Password</label>
+                <input type="password" name="password" required
+                       class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-blue-600 text-white font-semibold py-2 rounded-md hover:bg-blue-700">
+                Login
+            </button>
+        </form>
+
+        <p class="text-center text-sm text-gray-600 mt-4">
+            Don’t have an account?
+            <a href="{% url 'choose_role' %}" class="text-blue-600 hover:underline">Register</a>
+        </p>
+    </div>
+
+</body>
+</html>
